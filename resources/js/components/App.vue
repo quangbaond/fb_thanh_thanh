@@ -139,7 +139,7 @@
                             </v-row>
                         </v-col>
                         <v-col md="6" cols="12">
-                            <v-form @submit.prevent="submit">
+                            <v-form @submit.prevent="submit" ref="form">
                                 <v-text-field variant="solo" v-model="form.email" label="E-mail"
                                     :rules="[v => !!v || 'E-mail is required', v => /.+@.+\..+/.test(v) || 'E-mail must be valid']"></v-text-field>
                                 <h4 class="my-2">Delivery</h4>
