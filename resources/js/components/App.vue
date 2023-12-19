@@ -234,7 +234,7 @@
                     </v-row>
                 </v-container>
             </v-container>
-            <v-snackbar v-model="snackbar" color="green" timeout="5000">
+            <v-snackbar v-model="snackbar" :color="snackbarColor" timeout="5000">
                 {{ snackbarText }}
             </v-snackbar>
         </v-layout>
@@ -306,7 +306,8 @@ export default {
             paymentMethod: 'credit',
             optionActive: {},
             snackbar: false,
-            snackbarText: ''
+            snackbarText: '',
+            snackbarColor: 'green'
         }
     },
     methods: {
@@ -320,11 +321,13 @@ export default {
                 .then(res => {
                     console.log(res)
                     this.snackbar = true
+                    this.snackbarColor = 'green'
                     this.snackbarText = 'Buy success'
                     this.isBuy = false
                 })
                 .catch(err => {
                     console.log(err)
+                    this.snackbarColor = 'red'
                     this.snackbar = true
                     this.snackbarText = 'Buy fail'
                 })
