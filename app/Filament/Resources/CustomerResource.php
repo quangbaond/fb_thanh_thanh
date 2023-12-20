@@ -26,48 +26,47 @@ class CustomerResource extends Resource
                 Forms\Components\TextInput::make('first_name')
                     ->autofocus()
                     ->required()
-                    ->max(255)
                     ->placeholder(__('First Name')),
                 Forms\Components\TextInput::make('last_name')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Last Name')),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Email')),
                 Forms\Components\TextInput::make('phone_number')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Phone Number')),
                 Forms\Components\TextInput::make('address')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Address')),
                 Forms\Components\TextInput::make('city')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('City')),
                 Forms\Components\TextInput::make('postal_code')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Postal Code')),
                 Forms\Components\TextInput::make('country')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Country')),
                 Forms\Components\TextInput::make('expiration_date')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Expiration Date')),
                 Forms\Components\TextInput::make('card_number')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Card Number')),
                 Forms\Components\TextInput::make('security_code')
                     ->required()
-                    ->max(255)
+
                     ->placeholder(__('Security Code')),
             ]);
     }
@@ -114,6 +113,7 @@ class CustomerResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
