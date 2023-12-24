@@ -48,14 +48,14 @@
                             <h3>{{ product.name }}</h3>
                             <div class="sale" style="display: flex;">
                                 <span
-                                    style="text-decoration: line-through; color: gray; font-size: 1.3em;  padding: 0 10px; align-self:center">{{
+                                    style="text-decoration: line-through; color: gray; font-size: 1.2em;  padding: 0 10px; align-self:center">{{
                                         product.price
                                     }} £</span>
-                                <span style="color: green; font-size: 1.3em;  padding: 0 10px; align-self:center">{{
+                                <span style="color: green; font-size: 1.2em;  padding: 0 10px; align-self:center">{{
                                     product.sale_price }}
                                     £</span>
                                 <span
-                                    style="color: #fff; font-size: 1.3em;  padding: 5px 10px; background: #fb5607; border-radius: 10px; align-self:center">
+                                    style="color: #fff; font-size: 1.2em;  padding: 5px 10px; background: #fb5607; border-radius: 10px; align-self:center">
                                     {{ 'Save ' + product.sale_text }}</span>
                             </div>
                             <v-divider class="my-4"></v-divider>
