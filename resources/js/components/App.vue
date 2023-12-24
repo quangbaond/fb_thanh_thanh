@@ -2,10 +2,10 @@
     <v-app>
         <v-layout>
             <v-container>
-                <v-container-fluid v-if="!isBuy">
+                <v-container v-if="!isBuy" class="con">
                     <v-row>
-                        <v-col cols="3" md="2" style="display: flex; justify-content: center">
-                            <v-img class="logo" :src="logo"></v-img>
+                        <v-col cols="3" md="1" style="display: flex; justify-content: center">
+                            <v-img width="120px" class="logo" :src="logo"></v-img>
                         </v-col>
                     </v-row>
                     <v-row justify="center" style="display: flex; justify-content: center">
@@ -176,7 +176,7 @@
                             </v-col>
                             <v-col md="6" cols="12">
                                 <div v-for="review in reviews" :key="review.id" class="mt-2">
-                                    <v-avatar color="sbrown">{{ review.initials }}</v-avatar>
+                                    <v-avatar color="surface-variant">{{ review.initials }}</v-avatar>
                                     <span style="margin-left: 10px">{{ review.name }}</span>
                                     <p>
                                         <v-rating disabled v-model="review.rating" density="compact" color="white"
@@ -196,7 +196,7 @@
                     </v-container>
 
 
-                </v-container-fluid>
+                </v-container>
                 <v-container v-else>
                     <v-row>
 
@@ -555,5 +555,12 @@ ul li {
     list-style: disc;
     margin-bottom: 4px;
     font-size: 14px;
+}
+
+
+@media only screen and (min-width: 1200px) {
+    .con {
+        padding: 0 15%;
+    }
 }
 </style>
