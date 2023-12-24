@@ -560,7 +560,7 @@ ul li {
 
 @media only screen and (min-width: 1200px) {
     .con {
-        padding: 0 15%;
+        padding: 0 15% !important;
     }
 }
 </style>
