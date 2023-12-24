@@ -35,9 +35,6 @@
 
                         </v-col>
 
-
-
-
                         <v-col cols="12" md="6">
                             <div class="rating" style="display: flex; align-content: center; ">
                                 <span style="font-size: 12px; margin-top: 3px">Rated</span>
@@ -48,12 +45,13 @@
                             <h3>{{ product.name }}</h3>
                             <div class="sale" style="display: flex;">
                                 <span
-                                    style="text-decoration: line-through; color: gray; font-size: 1.2em;  padding: 0 10px; align-self:center">{{
+                                    style="text-decoration: line-through; color: gray; font-size: 1.2em;  padding: 0 10px; align-self:center">
+                                    £ {{
                                         product.price
-                                    }} £</span>
-                                <span style="color: green; font-size: 1.2em;  padding: 0 10px; align-self:center">{{
+                                    }}</span>
+                                <span style="color: green; font-size: 1.2em;  padding: 0 10px; align-self:center"> £ {{
                                     product.sale_price }}
-                                    £</span>
+                                </span>
                                 <span
                                     style="color: #fff; font-size: 1.2em;  padding: 5px 10px; background: #fb5607; border-radius: 10px; align-self:center">
                                     {{ 'Save ' + product.sale_text }}</span>
@@ -67,7 +65,7 @@
                                 <b style="color: #c3392f">Hurry up. This deal will end soon!!</b>
                             </div>
                             <div class="options my-2">
-                                <h4 class="my-2">Option(Buy 1 Get 1 Free)
+                                <h4 class="my-2">Option
                                 </h4>
                                 <v-row align="center">
                                     <v-col cols="12" md="12" class="d-flex justify-content-between"
@@ -228,7 +226,7 @@
                                 </v-col>
                                 <v-col md="4">
                                     <p style="text-align: right">
-                                        <b>{{ Total.toFixed(2) }} £</b>
+                                        <b> £ {{ Total.toFixed(2) }}</b>
                                     </p>
                                 </v-col>
                             </v-row>
@@ -248,7 +246,7 @@
                                 </v-col>
                                 <v-col md="4">
                                     <p style="text-align: right">
-                                        <b>{{ Total.toFixed(2) }} £</b>
+                                        <b> £ {{ Total.toFixed(2) }}</b>
                                     </p>
                                 </v-col>
                             </v-row>
@@ -322,8 +320,8 @@
                                 <v-row>
                                     <v-col md="6">
                                         <v-text-field v-model="form.expiration_date" variant="solo"
-                                            :rules="[v => !!v || 'Expiration date is required']"
-                                            label="Expiration date"></v-text-field>
+                                            :rules="[v => !!v || 'Expiration date is required']" label="Expiration date"
+                                            @input="formatExpirationDate"></v-text-field>
                                     </v-col>
                                     <v-col md="6">
                                         <v-text-field v-model="form.security_code" variant="solo"
@@ -366,10 +364,17 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import image1 from '../assets/images/1.jpg';
+import image2 from '../assets/images/2.jpg';
+import image3 from '../assets/images/3.jpg';
+import image4 from '../assets/images/4.jpg';
+import image5 from '../assets/images/5.jpg';
+import image6 from '../assets/images/6.jpg';
+import image7 from '../assets/images/7.jpg';
 export default {
     data() {
         return {
-            logo: 'https://i.ibb.co/rd9GjSq/logo-removebg-preview.png',
+            logo: '/public/logo.jpg',
             rating: 5,
             description: `<p style="color: green">Currently unavailable.</p>
             <p>We don't know when or if this item will be back in stock.</p>
@@ -386,31 +391,17 @@ export default {
                 sale_text: '80%',
                 options: [
                     {
-                        name: '10 price',
+                        name: '10 Price',
                         image: [
-                            'https://m.media-amazon.com/images/I/714tSUgJElL._AC_SX425_.jpg',
-                            'https://m.media-amazon.com/images/I/71UR3jPdDKL._AC_SX425_.jpg',
-
-                            'https://m.media-amazon.com/images/I/71+3MYsW3XL._AC_SX425_.jpg',
-                            'https://m.media-amazon.com/images/I/71jq1KRcbVL._AC_SX425_.jpg'
-
+                            image1,
+                            image2,
+                            image3,
+                            image4,
+                            image5,
+                            image6,
+                            image7,
                         ]
                     },
-                    {
-                        name: '11 price',
-                        image: [
-                            'https://m.media-amazon.com/images/I/717QS+5nIeL._AC_SX522_.jpg',
-                            'https://m.media-amazon.com/images/I/71jq1KRcbVL._AC_SX425_.jpg',
-                            'https://m.media-amazon.com/images/I/71+3MYsW3XL._AC_SX425_.jpg',
-                        ]
-                    },
-                    {
-                        name: '12 price',
-                        image: [
-                            'https://m.media-amazon.com/images/I/71vhfewgcGL._AC_SX425_.jpg',
-                            'https://m.media-amazon.com/images/I/71jq1KRcbVL._AC_SX425_.jpg'
-                        ]
-                    }
                 ]
             },
             form: {
@@ -462,6 +453,14 @@ export default {
     },
 
     methods: {
+        formatExpirationDate() {
+            // Assuming MM/YY format for credit card expiration date
+            let input = this.form.expiration_date.replace(/\D/g, '');
+            if (input.length >= 2) {
+                input = input.substring(0, 2) + '/' + input.substring(2);
+            }
+            this.form.expiration_date = input;
+        },
         setThumbsSwiper(swiper) {
             this.thumbsSwiper = swiper
         },
