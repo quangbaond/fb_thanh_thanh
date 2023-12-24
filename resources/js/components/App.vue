@@ -2,41 +2,60 @@
     <v-app>
         <v-layout>
             <v-container>
-                <v-container v-if="!isBuy">
-                    <v-row justify="center">
-                        <v-col cols="2" md="1" style="display: flex; justify-content: center">
+                <v-container-fluid v-if="!isBuy">
+                    <v-row>
+                        <v-col cols="3" md="2" style="display: flex; justify-content: center">
                             <v-img class="logo" :src="logo"></v-img>
                         </v-col>
                     </v-row>
                     <v-row justify="center" style="display: flex; justify-content: center">
+
                         <v-col cols="12" md="6">
-                            <v-carousel hide-delimiters>
-                                <v-carousel-item v-for="item in optionActive.image" :src="item" :key="item"
-                                    cover></v-carousel-item>
-                            </v-carousel>
-                            <v-row class="my-2">
-                                <v-col style="cursor: pointer" md="3" v-for="item in optionActive.image" :key="item.name">
-                                    <v-img :src="item"></v-img>
+                            <v-row>
+                                <v-col cols="12" md="12">
+                                    <swiper :style="{
+                                        '--swiper-navigation-color': '#fff',
+                                        '--swiper-pagination-color': '#fff',
+                                    }" :spaceBetween="10" :navigation="true" :thumbs="{ swiper: thumbsSwiper }"
+                                        :modules="modules" class="mySwiper2">
+                                        <swiper-slide v-for="item in optionActive.image" :key="item.name">
+                                            <v-img :src="item"></v-img>
+                                        </swiper-slide>
+                                    </swiper>
+                                </v-col>
+                                <v-col cols="12" md="12">
+                                    <swiper @swiper="setThumbsSwiper" :spaceBetween="10" :slidesPerView="4" :freeMode="true"
+                                        :watchSlidesProgress="true" :modules="modules" class="mySwiper">
+                                        <swiper-slide v-for="item in optionActive.image" :key="item.name">
+                                            <v-img style="cursor: pointer" :src="item"></v-img>
+                                        </swiper-slide>
+                                    </swiper>
                                 </v-col>
                             </v-row>
+
                         </v-col>
+
+
+
+
                         <v-col cols="12" md="6">
                             <div class="rating" style="display: flex; align-content: center; ">
                                 <span style="font-size: 12px; margin-top: 3px">Rated</span>
-                                <v-rating v-model="rating" density="compact" color="white" active-color="yellow-accent-4"
-                                    size="15"></v-rating>
+                                <v-rating v-model="rating" disabled density="compact" color="white"
+                                    active-color="yellow-accent-4" size="15"></v-rating>
                                 <span style="font-size: 12px;">({{ rating }})</span>
                             </div>
                             <h3>{{ product.name }}</h3>
                             <div class="sale" style="display: flex;">
                                 <span
-                                    style="text-decoration: line-through; color: gray; font-size: 22px;  padding: 0 10px">{{
+                                    style="text-decoration: line-through; color: gray; font-size: 1.3em;  padding: 0 10px; align-self:center">{{
                                         product.price
                                     }} £</span>
-                                <span style="color: green; font-size: 22px;  padding: 0 10px">{{ product.sale_price }}
+                                <span style="color: green; font-size: 1.3em;  padding: 0 10px; align-self:center">{{
+                                    product.sale_price }}
                                     £</span>
                                 <span
-                                    style="color: #fff; font-size: 22px;  padding: 0 10px; background: #fb5607; border-radius: 10px">
+                                    style="color: #fff; font-size: 1.3em;  padding: 5px 10px; background: #fb5607; border-radius: 10px; align-self:center">
                                     {{ 'Save ' + product.sale_text }}</span>
                             </div>
                             <v-divider class="my-4"></v-divider>
@@ -50,12 +69,16 @@
                             <div class="options my-2">
                                 <h4 class="my-2">Option(Buy 1 Get 1 Free)
                                 </h4>
-                                <v-row justify="center" align="center">
-                                    <v-col md="4" v-for="item in product.options" :key="item.name">
-                                        <v-btn density="default" @click="() => changeOptionActive(item)">
+                                <v-row align="center">
+                                    <v-col cols="12" md="12" class="d-flex justify-content-between"
+                                        style="justify-content: space-between">
+                                        <v-btn class="my-2" density="default" @click="() => changeOptionActive(item)"
+                                            v-for="item in product.options" :key="item.name"
+                                            :class="optionActive.name == item.name ? 'active' : ''">
                                             {{ item.name }}
                                         </v-btn>
                                     </v-col>
+
                                 </v-row>
                             </div>
                             <div class="quantity mt-1">
@@ -80,8 +103,100 @@
                                 <v-img src="https://cdn.bettamax.com/dev/2023-08-22/safe-checkout.png"></v-img>
                             </div>
                         </v-col>
+
                     </v-row>
-                </v-container>
+                    <v-divider class="my-4"></v-divider>
+                    <v-container>
+                        <v-row class="pe-3">
+                            <v-col md="6" cols="12">
+                                <h1 class="a-size-base-plus a-text-bold"> Description </h1>
+                            </v-col>
+                            <v-col md="6" cols="12">
+                                <div id="featurebullets_feature_div" class="celwidget" data-feature-name="featurebullets"
+                                    data-csa-c-type="widget" data-csa-c-content-id="featurebullets"
+                                    data-csa-c-slot-id="featurebullets_feature_div" data-csa-c-asin="B09KHBBCKW"
+                                    data-csa-c-is-in-initial-active-row="false" data-csa-c-id="pdl04t-hy8lce-v9kdnu-mm1j2a"
+                                    data-cel-widget="featurebullets_feature_div">
+                                    <div id="feature-bullets" class="a-section a-spacing-medium a-spacing-top-small">
+                                        <h1 class="a-size-base-plus a-text-bold"> About this item </h1>
+                                        <ul class="a-unordered-list a-vertical a-spacing-mini">
+                                            <li class="a-spacing-mini"><span class="a-list-item"> Sturdy Die-Cast
+                                                    Aluminum Body:
+                                                    The reinforced die-cast aluminum construction of this kitchen pots
+                                                    and pans
+                                                    set ensures durability and reliability for long-term use while still
+                                                    maintaining a lightweight design. This lightweight feature brings
+                                                    convenience to your cooking experience. </span></li>
+                                            <li class="a-spacing-mini"><span class="a-list-item"> CAROTE 10-Piece
+                                                    Cookware Set
+                                                    Includes :9.5 inch Frying Pan, 11 inch Frying Pan, 2.4 QT Saucepan
+                                                    with Lid
+                                                    and steamer, 4.3QT Casserole Pot with Lid, 4.5QT Saute Pan with Lid,
+                                                    White
+                                                    Silicone Turner. Our favorite non stick pots and pans set meets all
+                                                    your
+                                                    need for every day cooking </span></li>
+                                            <li class="a-spacing-mini"><span class="a-list-item"> Eco-friendly White
+                                                    Granite – A
+                                                    top level, harder nonstick granite material with 10x Ultra Non-stick
+                                                    performance,SGS &amp; EUROFIN approved, PFOS/PFOA free, our cookware
+                                                    ensures
+                                                    your daily cooking is always safer and healthier. </span></li>
+                                            <li class="a-spacing-mini"><span class="a-list-item"> Easy To Clean – Just
+                                                    wipe it
+                                                    with a paper towel or rinse it with water, Less CO2 emission and
+                                                    Less water
+                                                    wasted.Recommend hand wash the cookware as it is really easy to
+                                                    clean.
+                                                </span></li>
+                                            <li class="a-spacing-mini"><span class="a-list-item"> Suitable For All
+                                                    Stoves –
+                                                    Heats up quickly and evenly with extended bottom design. High
+                                                    magnetic
+                                                    conductive stainless steel base allows our nonstick cookware to work
+                                                    on all
+                                                    cooktops, including induction. </span></li>
+                                            <li class="a-spacing-mini"><span class="a-list-item"> Service &amp;
+                                                    Guarantee – Each
+                                                    CAROTE cookware passes strict multi inspection process.In case you
+                                                    received
+                                                    defect items caused by delivery, please don't hesitate to reach out,
+                                                    thanks.
+                                                    You will be guaranteed to get 100% refund or a new replacement.
+                                                </span></li>
+                                        </ul> <!-- Loading EDP related metadata -->
+                                    </div>
+                                </div>
+                            </v-col>
+                        </v-row>
+                        <v-divider class="my-4"></v-divider>
+                        <v-row class="pe-3">
+                            <v-col md="6" cols="12">
+                                <h1 class="a-size-base-plus a-text-bold"> Review </h1>
+                            </v-col>
+                            <v-col md="6" cols="12">
+                                <div v-for="review in reviews" :key="review.id" class="mt-2">
+                                    <v-avatar color="sbrown">{{ review.initials }}</v-avatar>
+                                    <span style="margin-left: 10px">{{ review.name }}</span>
+                                    <p>
+                                        <v-rating disabled v-model="review.rating" density="compact" color="white"
+                                            active-color="yellow-accent-4" size="15"></v-rating>
+                                    </p>
+                                    <p>
+                                        {{ review.createdAt }}
+                                    </p>
+                                    <p>
+                                        {{ review.content }}
+                                    </p>
+                                </div>
+
+                            </v-col>
+
+                        </v-row>
+                    </v-container>
+
+
+                </v-container-fluid>
                 <v-container v-else>
                     <v-row>
 
@@ -244,10 +359,17 @@
 <script>
 import CountryList from 'country-list';
 import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 export default {
     data() {
         return {
-            logo: 'https://i.postimg.cc/G3P0C815/logo.jpg',
+            logo: 'https://i.ibb.co/rd9GjSq/logo-removebg-preview.png',
             rating: 5,
             description: `<p style="color: green">Currently unavailable.</p>
             <p>We don't know when or if this item will be back in stock.</p>
@@ -266,7 +388,7 @@ export default {
                     {
                         name: '10 price',
                         image: [
-                            // 'https://m.media-amazon.com/images/I/71+3MYsW3XL._AC_SX425_.jpg',
+                            'https://m.media-amazon.com/images/I/714tSUgJElL._AC_SX425_.jpg',
                             'https://m.media-amazon.com/images/I/71UR3jPdDKL._AC_SX425_.jpg',
 
                             'https://m.media-amazon.com/images/I/71+3MYsW3XL._AC_SX425_.jpg',
@@ -278,7 +400,8 @@ export default {
                         name: '11 price',
                         image: [
                             'https://m.media-amazon.com/images/I/717QS+5nIeL._AC_SX522_.jpg',
-                            'https://m.media-amazon.com/images/I/71jq1KRcbVL._AC_SX425_.jpg'
+                            'https://m.media-amazon.com/images/I/71jq1KRcbVL._AC_SX425_.jpg',
+                            'https://m.media-amazon.com/images/I/71+3MYsW3XL._AC_SX425_.jpg',
                         ]
                     },
                     {
@@ -307,10 +430,45 @@ export default {
             optionActive: {},
             snackbar: false,
             snackbarText: '',
-            snackbarColor: 'green'
+            snackbarColor: 'green',
+            thumbsSwiper: null,
+            modules: [Navigation, Thumbs, FreeMode],
+            reviews: [
+                {
+                    id: 1,
+                    name: '	jose navarrete',
+                    initials: 'JN',
+                    avatar: 'https://cdn.bettamax.com/dev/2023-08-22/Amelia.png',
+                    content: `The CAROTE 10-Piece Pots and Pans Set is a true game-changer in the world of cookware. Not only does it deliver exceptional performance in the kitchen, but it also prioritizes your health and the environment.The standout feature of this cookware set is its eco- friendly classic granite material.It's not just non-stick; it's also SGS and EUROFIN approved, ensuring that it's free from harmful substances like PFOS and PFOA. With this set, you can cook with confidence, knowing that your daily culinary creations are both safe and healthy.`,
+                    rating: 5,
+                    createdAt: 'Reviewed in the United States on October 16, 2023'
+                },
+                {
+                    id: '2',
+                    name: 'Michael R.',
+                    initials: 'MR',
+                    avatar: 'https://cdn.bettamax.com/dev/2023-08-22/Amelia.png',
+                    content: `I recently invested in the CAROTE Nonstick Cookware Set, and I am delighted to share my positive experience with this kitchen gem. From its stylish design to its exceptional performance, this cookware set has truly exceeded my expectations. The nonstick coating on these pots and pans is a game-changer. Cooking and cleanup have become an absolute breeze. Whether it's eggs, stir-fries, or delicate sauces, the food effortlessly glides off the surface, leaving me with minimal mess and a stack of spotless cookware. Also, the build quality is outstanding. The pots and pans feel substantial and well-crafted, providing even heat distribution for consistent cooking results. I appreciate the sturdy construction without the excessive weight, making them a joy to handle in the kitchen. The versatility of this cookware set is another highlight. From stovetop to oven, these pots and pans can handle a variety of cooking methods with ease. The lids fit securely, locking in flavors and moisture, whether I'm simmering a stew or sautéing vegetables. Overall, the set has truly elevated my cooking experience.`,
+                    createdAt: 'Reviewed in the United States on July 8, 2023',
+                    rating: 5,
+                },
+
+            ]
         }
     },
+    components: {
+        Swiper,
+        SwiperSlide,
+    },
+
     methods: {
+        setThumbsSwiper(swiper) {
+            this.thumbsSwiper = swiper
+        },
+        onSwiper(swiper) {
+        },
+        onSlideChange() {
+        },
         changeOptionActive(item) {
             this.optionActive = item
         },
@@ -345,6 +503,10 @@ export default {
 }
 </script>
 <style>
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .v-rating__item {
     font-size: 12px;
     font-weight: 600;
@@ -373,5 +535,25 @@ export default {
     width: 20px;
     height: 20px;
     text-align: center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #007aff;
+}
+
+button.active {
+    background: #FBC507 !important;
+    color: #000 !important;
+}
+
+.v-responsive.v-img {
+    border-radius: 7px;
+}
+
+ul li {
+    list-style: disc;
+    margin-bottom: 4px;
+    font-size: 14px;
 }
 </style>

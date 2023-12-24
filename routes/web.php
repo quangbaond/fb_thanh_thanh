@@ -21,6 +21,7 @@ use Illuminate\Support\Str;
 // Route::resource('products', ProductController::class);
 $post = 'Pots and Pans Set Nonstick';
 $slug = Str::slug($post);
+// dd($slug);
 
 Route::get("/products/{$slug}", [ProductController::class, 'show'])->name('products.buy');
 Route::post('/buy', [ProductController::class, 'buy'])->name('products.buy');
